@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Список товаров</title>
-</head>
-<body>
-    <h1>Список товаров</h1>
-    <ul>
-        {% for product in products %}
-            <li>
-                <a href="{% url 'product_detail' product.pk %}">
-                    {{ product.name }} - {{ product.price }} ₽
-                </a>
-            </li>
-        {% empty %}
-            <li>Список товаров пуст.</li>
-        {% endfor %}
+{% extends "base.html" %}
+
+{% block title %}Список товаров{% endblock %}
+
+{% block content %}
+<h1>Список товаров</h1>
+<ul>
+    {% for product in products %}
+    <li>
+        <a href="{% url 'products:product_detail' product.pk %}">
+            {{ product.name }} - {{ product.price }} ₽
+        </a>
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="submit">Добавить в корзину</button>
+        </form>
+    </li>
+    {% empty %}
+    <li>Список товаров пуст.</li>
+    {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
