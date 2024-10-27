@@ -18,8 +18,12 @@
                 <li>
                     {{ item.product.name }} ({{ item.quantity }}) - {{ item.total_price }}
                 </li>
-                {% empty %}
-                    <li>В корзине пусто.</li>
+                <form action="{%url 'cart:cart_remove' item.product.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            {% empty %}
+                <li>В корзине пусто.</li>
             {% endfor %}
         </tbody>
     </table>

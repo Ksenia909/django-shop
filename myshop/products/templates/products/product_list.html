@@ -7,7 +7,7 @@
 <ul>
     {% for product in products %}
     <li>
-        <a href="{% url 'products:product_detail' product.pk %}">
+        <a href="{% url 'products:product_detail' product.slug %}">
             {{ product.name }} - {{ product.price }} ₽
         </a>
         <form action="{% url 'cart:cart_add' product.id %}" method="post">
