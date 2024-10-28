@@ -3,21 +3,42 @@
 {% block title %}Список товаров{% endblock %}
 
 {% block content %}
-<h1>Список товаров</h1>
-<ul>
-    {% for product in products %}
-    <li>
-        <a href="{% url 'products:product_detail' product.slug %}">
-            {{ product.name }} - {{ product.price }} ₽
-        </a>
-        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-            {% csrf_token %}
-            <input type="number" name="quantity" value="1" min="1">
-            <button type="submit">Добавить в корзину</button>
-        </form>
-    </li>
-    {% empty %}
-    <li>Список товаров пуст.</li>
-    {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Товары{% if category %} в категории: {{ category.name }}{% endif %}</h1>
+            <nav>
+                <ul class="category-list">
+                    <li><a href="{% url 'products:product_list' %}">Все категории</a></li>
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'products:product_list_by_category' category.slug %}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+        {% if products %}
+            <div class="product-list">
+                <ul>
+                    {% for product in products %}
+                    <li>
+                        <a href="{% url 'products:product_detail' product.slug %}">
+                            {{ product.name }} - {{ product.price }} ₽
+                        </a>
+                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="1" min="1">
+                            <button type="submit">Добавить в корзину</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        {% else %}
+            <p>Нет товаров{% if category %} в данной категории{% endif %}.</p>
+        {% endif %}
+    </div>
+
 {% endblock %}
