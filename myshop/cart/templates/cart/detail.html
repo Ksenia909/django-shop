@@ -3,30 +3,20 @@
 {% block title %}Ваша корзина покупок{% endblock %}
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-                <th>Продукт</th>
-                <th>Количество</th>
-                <th>Цена</th>
-                <th>Общее количество</th>
-                <th>Действие</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in cart %}
-                <li>
-                    {{ item.product.name }} ({{ item.quantity }}) - {{ item.total_price }}
-                </li>
-                <form action="{%url 'cart:cart_remove' item.product.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Удалить</button>
-                </form>
-            {% empty %}
-                <li>В корзине пусто.</li>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% for item in cart %}
+        <li>
+            <a href="{% url 'products:product_detail' item.product.slug %}">
+                {{ item.product.name }}
+            </a>
+            ({{ item.quantity }}) - {{ item.total_price }}
+        </li>
+        <form action="{%url 'cart:cart_remove' item.product.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Удалить</button>
+        </form>
+        {% empty %}
+            <li>В корзине пусто.</li>
+    {% endfor %}
     <p>Общая стоимость: {{ cart.get_total_price }} ₽</p>
     <a href="{% url 'products:product_list' %}">Продолжить покупки</a>
 {% endblock %}
