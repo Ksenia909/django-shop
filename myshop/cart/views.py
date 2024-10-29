@@ -8,7 +8,7 @@ def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
     cart.add(product=product, quantity=quantity, override_quantity=False)
-    return redirect('cart:cart_detail')
+    return render(request, 'cart/detail.html', {'cart': cart, 'show_message': True})
 
 
 def cart_remove(request, product_id):

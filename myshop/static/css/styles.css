@@ -63,6 +63,20 @@ a:hover, button:hover {
     color: #6E6E6E;
 }
 
+.cart-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #8FB996;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+
 button {
     background-color: #3B7D46;
     color: #FFFFFF;

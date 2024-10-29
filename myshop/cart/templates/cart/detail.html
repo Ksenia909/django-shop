@@ -3,6 +3,11 @@
 {% block title %}Ваша корзина покупок{% endblock %}
 
 {% block content %}
+    {% if show_message %}
+        <script>
+            showAddToCartMessage();
+        </script>
+    {% endif %}
     {% for item in cart %}
         <li>
             <a href="{% url 'products:product_detail' item.product.slug %}">
