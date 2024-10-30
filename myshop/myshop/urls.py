@@ -22,3 +22,6 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('', include('products.urls'))
 ]
+
+admin.site.site_header = "Панель администрирования"
+admin.site.index_title = "My shop"
