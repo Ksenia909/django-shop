@@ -8,20 +8,66 @@
             showAddToCartMessage();
         </script>
     {% endif %}
-    {% for item in cart %}
-        <li>
-            <a href="{% url 'products:product_detail' item.product.slug %}">
-                {{ item.product.name }}
-            </a>
-            ({{ item.quantity }}) - {{ item.total_price }}
-        </li>
-        <form action="{%url 'cart:cart_remove' item.product.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Удалить</button>
-        </form>
-        {% empty %}
-            <li>В корзине пусто.</li>
-    {% endfor %}
-    <p>Общая стоимость: {{ cart.get_total_price }} ₽</p>
-    <a href="{% url 'products:product_list' %}">Продолжить покупки</a>
+    <div class="cart-container">
+        <div class="cart-items">
+            <h2>Корзина</h2>
+            {% if cart %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'products:product_detail' item.product.slug %}">{{ item.product.name }}</a>
+                        </td>
+
+                        <td>
+                            <form action="{% url 'cart:cart_update' item.product.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" name="action" value="decrease" class="cart-button decrease">-</button>
+                                <span> {{ item.quantity }} </span>
+                                <button type="submit" name="action" value="increase" class="cart-button increase">+</button>
+                            </form>
+                        </td>
+                        <td>{{ item.total_price }} ₽</td>
+                        <td>
+                            <form action="{% url 'cart:cart_remove' item.product.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="cart-button delete">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>В корзине пусто.</p>
+            {% endif %}
+        </div>
+        <div class="cart-summary">
+            <h2>Итого</h2>
+            <table class="summary-table">
+                <tr>
+                    <td>Товары, {{ cart|length }} шт.</td>
+                    <td>{{ cart.get_total_price }} ₽</td>
+                </tr>
+                <tr>
+                    <td>Скидка</td>
+                    <td>-100 ₽</td>
+                </tr>
+                <tr class="total">
+                    <td><strong>Итого</strong></td>
+                    <td><strong>{{ cart.get_total_price }} ₽</strong></td>
+                </tr>
+            </table>
+            <button class="checkout-btn">Заказать</button>
+        </div>
+    </div>
 {% endblock %}

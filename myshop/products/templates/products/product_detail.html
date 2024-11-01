@@ -3,9 +3,14 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-<h1>{{ product.name }}</h1>
-<p>{{ product.description }}</p>
-<p>Цена: {{ product.price }} ₽</p>
-<p>Количество: {{ product.stock }}</p>
-<a href="/">Назад</a>
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Цена: {{ product.price }} ₽</p>
+    <p>Количество: {{ product.stock }}</p>
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+        <button class="add-to-cart-button" type="submit">Добавить в корзину</button>
+    </form>
+    <a href="/">Назад</a>
 {% endblock %}

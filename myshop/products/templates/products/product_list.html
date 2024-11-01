@@ -28,8 +28,8 @@
                         </a>
                         <form action="{% url 'cart:cart_add' product.id %}" method="post">
                             {% csrf_token %}
-                            <input type="number" name="quantity" value="1" min="1">
-                            <button type="submit">Добавить в корзину</button>
+                            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+                            <button class="add-to-cart-button" type="submit">Добавить в корзину</button>
                         </form>
                     </li>
                     {% endfor %}
