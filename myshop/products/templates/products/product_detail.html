@@ -1,16 +1,23 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <p>Цена: {{ product.price }} ₽</p>
-    <p>Количество: {{ product.stock }}</p>
-    <form action="{% url 'cart:cart_add' product.id %}" method="post">
-        {% csrf_token %}
-        <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
-        <button class="add-to-cart-button" type="submit">Добавить в корзину</button>
-    </form>
-    <a href="/">Назад</a>
+    <div class="product">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <img src="{% static 'img/default.png' %}" alt="No image available">
+        {% endif %}
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <p>Цена: {{ product.price }} ₽</p>
+        <p>Количество: {{ product.stock }}</p>
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+            <button class="add-to-cart-button" type="submit">Добавить в корзину</button>
+        </form>
+        <a href="/">Назад</a>
+    </div>
 {% endblock %}

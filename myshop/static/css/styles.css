@@ -19,6 +19,22 @@ a:hover, button:hover {
     color: #5A9B67;
 }
 
+.login-button {
+    border-radius: 10px;
+    color: white;
+    transition: .2s linear;
+    background: #3B7D46;
+    font-size: 1.0em;
+    padding: 10px 20px;
+}
+
+.login-button:hover {
+    -webkit-transform: rotateZ(5deg);
+    -ms-transform: rotateZ(5deg);
+    transform: rotateZ(5deg);
+    color: #FFFFFF;
+}
+
 .add-to-cart-button, .cart-button {
     background-color: #3B7D46;
     color: #FFFFFF;
