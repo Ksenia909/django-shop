@@ -8,7 +8,7 @@ def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
     cart.add(product=product, quantity=quantity)
-    return render(request, 'cart/detail.html', {'cart': cart, 'show_message': True})
+    return render(request, 'cart/cart_detail.html', {'cart': cart, 'show_message': True})
 
 
 def cart_remove(request, product_id):
@@ -20,7 +20,7 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
-    return render(request, 'cart/detail.html', {'cart': cart})
+    return render(request, 'cart/cart_detail.html', {'cart': cart})
 
 
 def cart_update(request, product_id):
