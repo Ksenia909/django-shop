@@ -5,7 +5,9 @@
 
 {% block content %}
     <div class="container">
-        <h1>Товары{% if category %} в категории: {{ category.name }}{% endif %}</h1>
+        {% if category %}
+        <h2>Товары в категории: {{ category.name }}</h2>
+        {% endif %}
             <nav>
                 <ul class="category-list">
                     <li><a href="{% url 'products:product_list' %}">Все категории</a></li>
@@ -21,25 +23,28 @@
 
         {% if products %}
             <div class="product-list">
-                <ul>
-                    {% for product in products %}
-                    <li>
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                        {% else %}
-                            <img src="{% static 'img/default.png' %}" alt="No image available">
-                        {% endif %}
-                        <a href="{% url 'products:product_detail' product.slug %}">
-                            {{ product.name }} - {{ product.price }} ₽
-                        </a>
+                {% for product in products %}
+                <a href="{% url 'products:product_detail' product.slug %}">
+                    <div class="product-card">
+                        <div class="product-image">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static 'img/default.png' %}" alt="No image available">
+                            {% endif %}
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-name">{{ product.name }}</h2>
+                            <p class="product-price">{{ product.price }} ₽</p>
+                        </div>
                         <form action="{% url 'cart:cart_add' product.id %}" method="post">
                             {% csrf_token %}
-                            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+
                             <button class="add-to-cart-button" type="submit">Добавить в корзину</button>
                         </form>
-                    </li>
-                    {% endfor %}
-                </ul>
+                    </div>
+                </a>
+                {% endfor %}
             </div>
 
         {% else %}

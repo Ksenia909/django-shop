@@ -9,15 +9,16 @@
 </head>
 <body>
     <script src="{% static 'js/scripts.js' %}"></script>
-    <header>
-        <h1>My Shop</h1>
-        <button id="login-btn" class="login-button">Войти</button>
-        <nav>
-            <ul>
-                <li><a href="{% url 'products:product_list' %}">Товары</a></li>
-                <li><a href="{% url 'cart:cart_detail' %}">Корзина</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="header-content">
+            <a href="{% url 'products:product_list' %}" class="logo-link">
+                <h1>My Shop</h1>
+            </a>
+            <div class="header-buttons">
+                <a href="{% url 'cart:cart_detail' %}" class="header-button">Корзина</a>
+                <button id="login-btn" class="header-button">Войти</button>
+            </div>
+        </div>
     </header>
 
     <main>
