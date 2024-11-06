@@ -27,7 +27,7 @@
                 <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
                 <button class="add-to-cart-button" type="submit">Добавить в корзину</button>
             </form>
-            <a href="/">Назад</a>
+            <a href="{% url 'products:product_list' %}">Назад</a>
         </div>
     </div>
 {% endblock %}

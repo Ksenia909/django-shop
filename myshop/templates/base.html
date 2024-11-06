@@ -15,8 +15,8 @@
                 <h1>My Shop</h1>
             </a>
             <div class="header-buttons">
-                <a href="{% url 'cart:cart_detail' %}" class="header-button">Корзина</a>
-                <button id="login-btn" class="header-button">Войти</button>
+                <a href="{% url 'cart:cart_detail' %}"><button class="header-button">Корзина</button></a>
+                <a href="{% url 'users:login' %}"><button class="header-button">Войти</button></a>
             </div>
         </div>
     </header>
