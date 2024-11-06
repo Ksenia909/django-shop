@@ -275,20 +275,6 @@ main {
     color: #3d3d3d;
 }
 
-.cart-message {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #8FB996;
-    color: #FFFFFF;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s;
-    opacity: 1;
-}
-
 .cart-container {
     display: flex;
     justify-content: space-between;
@@ -338,5 +324,31 @@ main {
 
 .checkout-btn:hover {
     background-color: #A4754A;
+}
+
+.messages {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    width: 300px;
+    transition: opacity 0.5s ease;
+
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #4caf50;
+}
+
+.message.info {
+    background-color: #8FB996;
+}
+
+.message.error {
+    background-color: #f44336;
 }
 

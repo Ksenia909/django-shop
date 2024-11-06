@@ -3,11 +3,6 @@
 {% block title %}Ваша корзина покупок{% endblock %}
 
 {% block content %}
-    {% if show_message %}
-        <script>
-            showAddToCartMessage();
-        </script>
-    {% endif %}
     <div class="continue-shopping">
         <a href="{% url 'products:product_list' %}">Продолжить покупки</a>
     </div>

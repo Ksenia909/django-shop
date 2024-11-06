@@ -16,11 +16,23 @@
             </a>
             <div class="header-buttons">
                 <a href="{% url 'cart:cart_detail' %}"><button class="header-button">Корзина</button></a>
-                <a href="{% url 'users:login' %}"><button class="header-button">Войти</button></a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'users:logout' %}"><button class="header-button">Выйти</button></a>
+                {% else %}
+                    <a href="{% url 'users:login' %}"><button class="header-button">Войти</button></a>
+                {% endif %}
             </div>
         </div>
     </header>
-
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <main>
         {% block content %}{% endblock %}
     </main>

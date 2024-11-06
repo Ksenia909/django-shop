@@ -1,4 +1,3 @@
-// Эффект для кнопок при нажатии
 document.addEventListener("DOMContentLoaded", function() {
     const buttons = document.querySelectorAll("button");
 
@@ -15,18 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
             button.style.transform = "scale(1)";
         });
     });
-});
-
-function showAddToCartMessage() {
-    const message = document.createElement("div");
-    message.textContent = "Товар добавлен в корзину!";
-    message.classList.add("cart-message");
-    document.body.appendChild(message);
 
     setTimeout(() => {
-        message.style.opacity = "0";
-        setTimeout(() => {
-            message.remove();
-        }, 500);
-    }, 1500);
-}
+        const messages = document.querySelector('.messages');
+        if (messages) {
+            messages.style.opacity = "0";
+            setTimeout(() => {
+                messages.style.display = 'none';
+                    }, 500);
+                }
+            }, 3000);
+        });
+
+
+

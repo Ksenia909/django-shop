@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from products.models import Product
 from .cart import Cart
@@ -8,7 +9,8 @@ def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
     cart.add(product=product, quantity=quantity)
-    return render(request, 'cart/cart_detail.html', {'cart': cart, 'show_message': True})
+    messages.success(request, 'Товар добавлен в корзину!')
+    return render(request, 'cart/cart_detail.html', {'cart': cart})
 
 
 def cart_remove(request, product_id):
