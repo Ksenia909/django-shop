@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block content %}
+<div class="centered-box">
 <h2>Регистрация</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="auth-button">Зарегистрироваться</button>
+    </form>
+</div>
 {% endblock %}
