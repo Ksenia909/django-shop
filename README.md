@@ -24,7 +24,7 @@ django-shop — это интернет-магазин, разработанны
 
 1. Клонируйте репозиторий:
    ```bash
-   https://github.com/Ksenia909/django-shop.git
+   git clone https://github.com/Ksenia909/django-shop.git
    
 2. Перейдите в директорию проекта:
    ```bash
